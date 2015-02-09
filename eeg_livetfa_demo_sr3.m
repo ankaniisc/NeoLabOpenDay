@@ -7,7 +7,9 @@ clear; clc; clf; drawnow;
 [conc.dat, Fconc] = wavread('concentrate.wav');
 
 fprintf('R E A D Y...\n');
-wavplay(ready.dat, Fready); % Please keep your eyes open while we get baseline
+ap = audioplayer(ready.dat,Fready);
+play(ap);
+%wavplay(ready.dat, Fready); % Please keep your eyes open while we get baseline
 
 % number of passes to average for baseline
 blPass = 15;
@@ -165,14 +167,19 @@ while (count < totPass)
 
             % cue user's attention
             fprintf('R E L A X...\n');
-            wavplay(relax.dat, Frelax); % Relax now and close your eyes
+            
+            %wavplay(relax.dat, Frelax); % Relax now and close your eyes
+            ap = audioplayer(relax.dat,Frelax);
+            play(ap);
         end
         continue;
     end
 
     if (count == stPass)
         fprintf('C O N C E N T R A T E...\n');
-        wavplay(conc.dat, Fconc); % Open your eyes and concentrate
+        ap = audioplayer(conc.dat,Fconc);
+        play(ap);
+        %wavplay(conc.dat, Fconc); % Open your eyes and concentrate
     end
     
     dPower = [dPower; log10(power(count,:)) - mLogBL];
